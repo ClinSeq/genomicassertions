@@ -1,5 +1,7 @@
 # genomicasserttions
 
+[![Build Status](https://travis-ci.org/dakl/genomicsassertions.svg?branch=master)](https://travis-ci.org/dakl/genomicsassertions)
+
 `genomicasserttions` is a python package which adds methods to test commonly generated files in the genomics field.
   
 # Examples
