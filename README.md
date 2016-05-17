@@ -1,4 +1,4 @@
-# genomicasserttions
+# genomicassertions
 
 [![Build Status](https://travis-ci.org/dakl/genomicassertions.svg?branch=master)](https://travis-ci.org/dakl/genomicassertions)
 
