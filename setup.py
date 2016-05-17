@@ -7,7 +7,7 @@ install_reqs = parse_requirements("requirements.txt", session=False)
 # reqs is a list of requirement
 reqs = [str(ir.req) for ir in install_reqs if ir.req is not None]
 
-setup(name='genomicsassertions',
+setup(name='genomicassertions',
       version='0.1.0',
       packages=find_packages(exclude=('tests*', 'docs', 'examples')),
       install_requires=reqs

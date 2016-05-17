@@ -1,15 +1,15 @@
 # genomicasserttions
 
-[![Build Status](https://travis-ci.org/dakl/genomicsassertions.svg?branch=master)](https://travis-ci.org/dakl/genomicsassertions)
+[![Build Status](https://travis-ci.org/dakl/genomicassertions.svg?branch=master)](https://travis-ci.org/dakl/genomicassertions)
 
-`genomicasserttions` is a python package which adds methods to test commonly generated files in the genomics field.
+`genomicassertions` is a python package which adds methods to test commonly generated files in the genomics field.
   
 # Examples
 
 Use the `VariantAssertions` mixin in your test class to get access to the methods.
 
 ~~~python
-from genomicsassertions.variantassertions import VariantAssertions
+from genomicassertions.variantassertions import VariantAssertions
 
 class TestVariants(unittest.TestCase, VariantAssertions):
     vcf = "tests/variants.vcf.gz"
@@ -37,5 +37,5 @@ The `test_vcf_has_variant_with_call()` asserts that individual items in a sample
 
 # Vcf requirements
 
-`genomicasserttions` requires the vcf files to be compressed with `bgzip` and indexed with `tabix` in order to work. This is required for the random access to variants provided by the index, which gives a significant performance increase over using non-indexed vcf files. 
+`genomicassertions` requires the vcf files to be compressed with `bgzip` and indexed with `tabix` in order to work. This is required for the random access to variants provided by the index, which gives a significant performance increase over using non-indexed vcf files. 
 

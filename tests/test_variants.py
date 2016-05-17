@@ -1,5 +1,5 @@
 import unittest
-from genomicsassertions.variantassertions import VariantAssertions
+from genomicassertions.variantassertions import VariantAssertions
 
 
 class TestVariants(unittest.TestCase, VariantAssertions):
