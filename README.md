@@ -1,6 +1,7 @@
 # genomicassertions
 
 [![Build Status](https://travis-ci.org/dakl/genomicassertions.svg?branch=master)](https://travis-ci.org/dakl/genomicassertions)
+[![Coverage Status](https://coveralls.io/repos/github/dakl/genomicassertions/badge.svg?branch=master)](https://coveralls.io/github/dakl/genomicassertions?branch=master)
 
 `genomicassertions` is a python package which adds methods to test commonly generated files in the genomics field.
   
