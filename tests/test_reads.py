@@ -18,3 +18,15 @@ class TestReads(unittest.TestCase, ReadAssertions):
     def test_raises_if_header_element_not_in_bam(self):
 	with self.assertRaises(AssertionError):
 	    self.assertBamHasHeaderElement(self.bam, "FOO")
+
+    def test_header_element_equals(self):
+	self.assertBamHeaderElementEquals(self.bam, 'HD', {'SO': 'coordinate', 'VN': '1.3'})
+
+    def assert_raises_if_test_header_element_not_equals(self):
+	# one wrong key in element
+	with self.assertRaises(AssertionError):
+	    self.assertBamHeaderElementEquals(self.bam, 'HD', {'SO': 'coordinate', 'VN': '1.4'})
+
+	# no element with name
+	with self.assertRaises(AssertionError):
+	    self.assertBamHeaderElementEquals(self.bam, 'FOO', {'SO': 'coordinate', 'VN': '1.4'})
