@@ -11,3 +11,10 @@ class TestReads(unittest.TestCase, ReadAssertions):
     def test_raises_if_incorrect_coverage(self):
 	with self.assertRaises(AssertionError):
 	    self.assertBamHasCoverageAt(self.bam, 323, 3, 178936091)
+
+    def test_bam_has_header_element(self):
+	self.assertBamHasHeaderElement(self.bam, "HD")
+
+    def test_raises_if_header_element_not_in_bam(self):
+	with self.assertRaises(AssertionError):
+	    self.assertBamHasHeaderElement(self.bam, "FOO")
