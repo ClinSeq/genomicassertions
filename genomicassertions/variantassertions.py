@@ -2,8 +2,6 @@ from vcf import Reader
 
 
 class VariantAssertions:
-    def __init__(self):
-        pass
 
     def assertVcfHasVariantAt(self, vcf, chrom, pos):
         v = Reader(filename=vcf)
@@ -45,12 +43,12 @@ class VariantAssertions:
 
     def assertVcfHasVariantWithCall(self, vcf, chrom, pos, sample, call):
         """
-	Assert that a call is made for a given sample in a given position. `call` is a dict corresponding to elements
-	in the vcf sample field. Example:
+        Assert that a call is made for a given sample in a given position. `call` is a dict corresponding to elements
+        in the vcf sample field. Example:
 
-	self.assertVcfHasVariantWithCall(my_vcf, 1, 3184885, 'B',
-					 call={'GT': '1/2', 'DP': 10})
-	"""
+        self.assertVcfHasVariantWithCall(my_vcf, 1, 3184885, 'B',
+                                         call={'GT': '1/2', 'DP': 10})
+        """
         self.assertVcfHasSample(vcf, sample)
 
         v = Reader(filename=vcf)
