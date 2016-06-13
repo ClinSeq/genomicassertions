@@ -18,16 +18,21 @@ class ReadAssertions:
                     "Coverage at {}:{} was zero in {}".format(
                         chrom, pos, bam))
 
-
     def assertBamHasHeaderElement(self, bam, header_element):
         samfile = pysam.AlignmentFile(bam, "rb")
         if header_element not in samfile.header:
-            raise AssertionError("Header element {} not in header of {}".format(header_element, bam))
+            raise AssertionError(
+                "Header element {} not in header of {}".format(header_element,
+                                                               bam))
 
-    def assertBamHeaderElementEquals(self, bam, header_element_name, header_element_value):
+    def assertBamHeaderElementEquals(self, bam, header_element_name,
+                                     header_element_value):
         samfile = pysam.AlignmentFile(bam, "rb")
         self.assertBamHasHeaderElement(bam, header_element_name)
 
         if samfile.header[header_element_name] != header_element_value:
-            raise AssertionError("Header element for key {} is incorrect. Check {}, got {}.".format(
-                header_element_name, header_element_value, samfile.header[header_element_name]))
+            raise AssertionError(
+                "Header element for key {} is incorrect. Check {}, got {}.".format(
+                    header_element_name,
+                    header_element_value,
+                    samfile.header[header_element_name]))

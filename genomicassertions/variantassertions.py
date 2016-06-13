@@ -12,34 +12,45 @@ class VariantAssertions:
                 variant_found = True
 
         if not variant_found:
-            raise AssertionError("Variant at {}:{} not present in {}".format(chrom, pos, vcf))
+            raise AssertionError("Variant at {}:{} not present in {}".format(
+                chrom, pos, vcf))
 
     def assertVcfHasVariantWithChromPosRefAlt(self, vcf, chrom, pos, ref, alt):
         v = Reader(filename=vcf)
         variants = v.fetch(chrom=chrom, start=pos - 1, end=pos)
         variant_found = False
         for variant in variants:
-            if variant.CHROM == str(chrom) and variant.POS == pos and variant.REF == ref and alt in variant.ALT:
+            if variant.CHROM == str(chrom) and \
+                    variant.POS == pos and \
+                    variant.REF == ref and \
+                    alt in variant.ALT:
                 variant_found = True
 
         if not variant_found:
-            raise AssertionError("Variant at {}:{} {}/{} not present in {}".format(chrom, pos, ref, alt, vcf))
+            raise AssertionError(
+                "Variant at {}:{} {}/{} not present in {}".format(chrom, pos,
+                                                                  ref, alt,
+                                                                  vcf))
 
     def assertVcfHasVariantWithChromPosId(self, vcf, chrom, pos, variant_id):
         v = Reader(filename=vcf)
         variants = v.fetch(chrom=chrom, start=pos - 1, end=pos)
         variant_found = False
         for variant in variants:
-            if variant.CHROM == str(chrom) and variant.POS == pos and variant.ID == str(variant_id):
+            if variant.CHROM == str(chrom) \
+                    and variant.POS == pos \
+                    and variant.ID == str(variant_id):
                 variant_found = True
 
         if not variant_found:
-            raise AssertionError("Variant at {}:{} with id {} not present in {}".format(chrom, pos, variant_id, vcf))
+            raise AssertionError("Variant at {}:{} with id {} not present in {}".format(
+                chrom, pos, variant_id, vcf))
 
     def assertVcfHasSample(self, vcf, sample):
         v = Reader(filename=vcf)
         if sample not in v.samples:
-            raise AssertionError("Sample {} not present in {}".format(sample, vcf))
+            raise AssertionError("Sample {} not present in {}".format(
+                sample, vcf))
 
     def assertVcfHasVariantWithCall(self, vcf, chrom, pos, sample, call):
         """

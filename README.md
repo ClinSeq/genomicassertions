@@ -4,11 +4,30 @@
 [![Coverage Status](https://coveralls.io/repos/github/dakl/genomicassertions/badge.svg?branch=master)](https://coveralls.io/github/dakl/genomicassertions?branch=master)
 
 `genomicassertions` is a python package which adds methods to test commonly generated files in the genomics field.
-  
+
 # Examples
 
-Use the `VariantAssertions` mixin in your test class to get access to the methods.
+Use the `VariantAssertions` or `ReadAssertions` mixin in your test class to get access to the methods.
 
+## VCF files
+
+For VCF files, the following methods exist:
+
+* `assertVcfHasVariantAt(vcf, chrom, pos)`
+* `assertVcfHasSample(vcf, sample)`
+* `assertVcfHasVariantWithChromPosRefAlt(vcf, chrom, pos, ref, alt)`
+* `assertVcfHasVariantWithChromPosId(vcf, chrom, pos, variant_id)`
+* `assertVcfHasVariantWithCall(vcf, chrom, pos, sample, call)`
+
+## BAM files
+
+* `assertBamHasCoverageAt(self, bam, coverage, chrom, pos)`
+* `assertBamHasHeaderElement(self, bam, header_element)`
+* `assertBamHeaderElementEquals(self, bam, header_element_name, header_element_value)`
+
+### Examples
+
+#### VCF files
 ~~~python
 from genomicassertions.variantassertions import VariantAssertions
 
@@ -28,7 +47,7 @@ class TestVariants(unittest.TestCase, VariantAssertions):
 
 ~~~
 
-The `test_vcf_has_variant_with_call()` asserts that individual items in a sample call are set. The parameter `call` is a dict with the items to test. The dict does not have to be complete, i.e. not all fields in the call have to be tested. 
+`assertVcfHasVariantWithCall()` asserts that individual items in a sample call are set. The parameter `call` is a dict with the items to test. The dict does not have to be complete, i.e. not all fields in the call have to be tested.
 
 ~~~python    
     def test_vcf_has_variant_with_call(self):
@@ -36,7 +55,30 @@ The `test_vcf_has_variant_with_call()` asserts that individual items in a sample
                                          call={'GT': '1/2', 'DP': 10})
 ~~~
 
-# Vcf requirements
+#### BAM files
 
-`genomicassertions` requires the vcf files to be compressed with `bgzip` and indexed with `tabix` in order to work. This is required for the random access to variants provided by the index, which gives a significant performance increase over using non-indexed vcf files. 
+~~~python
+from genomicassertions.readassertions import ReadAssertions
 
+class TestReads(unittest.TestCase, ReadAssertions):
+    bam = "tests/3_178936091.bam"
+
+    # assert coverage as chrom:pos
+    def test_has_coverage_as_pos(self):
+        self.assertBamHasCoverageAt(self.bam, coverage=324, chrom=3, pos=178936091)
+
+    def test_bam_has_header_element(self):
+        self.assertBamHasHeaderElement(self.bam, header_element="HD")
+
+    def test_header_element_equals(self):
+        self.assertBamHeaderElementEquals(self.bam,
+                                          header_element_name='HD',
+                                          header_element_value={'SO': 'coordinate',
+                                                                'VN': '1.3'}
+                                          )
+~~~
+
+
+# File requirements
+
+`genomicassertions` requires the vcf files to be compressed with `bgzip` and indexed with `tabix` in order to work. This is required for the random access to variants provided by the index, which gives a significant performance increase over using non-indexed vcf files. Bam files have to be indexed.
