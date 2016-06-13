@@ -5,6 +5,10 @@
 
 `genomicassertions` is a python package which adds methods to test commonly generated files in the genomics field.
 
+# Installation
+
+`pip install genomicassertions`
+
 # Examples
 
 Use the `VariantAssertions` or `ReadAssertions` mixin in your test class to get access to the methods.
