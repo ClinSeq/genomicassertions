@@ -1,2 +1,2 @@
 PyVCF
-pysam
+pysam==0.8.4
